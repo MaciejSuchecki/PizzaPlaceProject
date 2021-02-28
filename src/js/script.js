@@ -56,7 +56,35 @@
     constructior(id, data){
       const thisProduct = this;
 
+      thisProduct.id = id;
+      thisProduct.data = data;
+
+      thisProduct.renderInMenu();
+      thisProduct.initAccordion();
+
       console.log('new product:', thisProduct);
+    }
+    renderInMenu(){
+      const thisProduct = this;   //this
+
+      /* generate HTML based on template */
+      const generateHTML = templates.menuProduct(thisProduct.data);
+
+      /* create element using utils.createElementFromHTML */
+      thisProduct.element = utils.createDOMFromHTML(generateHTML);
+
+      /* find menu container */
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+      /* add element to menu */
+      menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      
+      /* find clickable trigger - elements react to click  */
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      console.log(clickableTrigger);
     }
   }
 
